@@ -12,26 +12,25 @@ $(function () {
   });
 
   var currentHour = dayjs().hour();
-
+  // Function to update the time-block classes based on the current time.
+  function updateBlock() {
+    // Loop through all time-blocks.
+    $(".time-block").each(function () {
+      var blockHour = parseInt($(this).attr("id").split("-")[1]);
+      var currentHour = dayjs().hour();
+      
+      if (blockHour < currentHour) {
+        // Past
+        $(this).removeClass("present future").addClass("past");
+      } else if (blockHour === currentHour) {
+        // Present
+        $(this).removeClass("past future").addClass("present");
+      } else {
+        // Future
+        $(this).removeClass("past present").addClass("future");
+      }
+    });
+  }
   $("#currentDay").text(dayjs().format("dddd, MMMM D, YYYY"));
-    // Function to update the time-block classes based on the current time.
-    function updateBlock() {
-      // Loop through all time-blocks.
-      $(".time-block").each(function () {
-        var blockHour = parseInt($(this).attr("id").split("-")[1]);
-        var currentHour = dayjs().hour();
-        
-        if (blockHour < currentHour) {
-          // Past
-          $(this).removeClass("present future").addClass("past");
-        } else if (blockHour === currentHour) {
-          // Present
-          $(this).removeClass("past future").addClass("present");
-        } else {
-          // Future
-          $(this).removeClass("past present").addClass("future");
-        }
-      });
-    }
-    updateBlock();
-})
+  updateBlock();
+});
