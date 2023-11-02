@@ -31,6 +31,15 @@ $(function () {
       }
     });
   }
+   // Function to retrieve and set user input from local storage.
+   function setUserInput() {
+    $(".time-block").each(function () {
+      var timeBlockId = $(this).attr("id");
+      var userInput = localStorage.getItem(timeBlockId);
+      $(this).find(".description").val(userInput);
+    });
+  }
   $("#currentDay").text(dayjs().format("dddd, MMMM D, YYYY"));
   updateBlock();
+  setUserInput();
 });
