@@ -11,7 +11,7 @@ $(function () {
     localStorage.setItem(timeBlockId, userInput);
   });
 
+  var currentHour = dayjs().hour();
 
-
-
+  $("#currentDay").text(dayjs().format("dddd, MMMM D, YYYY"));
 })
